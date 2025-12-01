@@ -34,7 +34,7 @@ auto lca = [&](ll u, ll v){
     if (ancestor(u, v)) rt u;
     if (ancestor(v, u)) rt v;
 
-    forrn(ulg-1, -1, i){
+    forrn(i, ulg-1){
         if (!ancestor(up[u][i], v))
         u = up[u][i];
     }

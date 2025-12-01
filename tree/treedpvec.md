@@ -1,6 +1,6 @@
 treedpvec
 treedpvec
-treedpvec
+treedpvec (dsu tree dynamic programming)
 auto treeDP = [&]<typename T = vl, typename R = ll>() -> vc<R> {
 
     T extra;

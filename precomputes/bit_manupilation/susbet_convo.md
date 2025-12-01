@@ -4,7 +4,7 @@ Subset Convolution
 void zetat(vl& ve, int n){
     int k = __lg(n);
     
-    forn(k)
+    forn(i, k)
     forn(mask, n)
     if ((mask >> i) & 1)
     ve[mask] += ve[mask ^ (1<<i)];
@@ -13,7 +13,7 @@ void zetat(vl& ve, int n){
 void mobioust(vl& ve, int n){
     int k = __lg(n);
     
-    forn(k)
+    forn(i, k)
     forn(mask, n)
     if ((mask >> i) & 1)
     ve[mask] -= ve[mask ^ (1<<i)];
@@ -36,18 +36,18 @@ vl subset_convo(vl& f, vl& g){
         G[bit][mask] = g[mask];
     }
 
-    forn(k){
+    forn(i, k){
         zetat(F[i], n);
         zetat(G[i], n);
     }
 
     
     forn(mask, n)
-    forn(k + 1)
+    forn(i, k + 1)
     forn(j, k + 1 - i)
     H[i + j][mask] += F[i][mask] * G[j][mask];
 
-    forn(k)
+    forn(i, k)
     mobioust(H[i], n);
 
     vl h(n, 0);

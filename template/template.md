@@ -7,7 +7,7 @@ using namespace std;
 #define ll long long
 #define endl '\n'
 #define overload4(_1,_2,_3,_4,name,...) name
-#define forn1(end) for(ll i = 0; i < (end); ++i)
+#define forn1(end) for(ll _ = 0; _ < (end); ++_)
 #define forn2(var, end) for(ll var = 0; var < (end); ++var)
 #define forn3(var, start, end) for(ll var = (start); var < (end); ++var)
 #define forn4(var, start, end, step) for(ll var = (start); var < (end); var += (step))

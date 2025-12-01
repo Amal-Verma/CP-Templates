@@ -9,7 +9,7 @@ class DSU {
     DSU(ll n) {
         parent = vec(n, 0ll);
         size = vec(n, 1ll);
-        forn(n) parent[i] = i;
+        forn(i, n) parent[i] = i;
     }
 
     ll find(ll a) {

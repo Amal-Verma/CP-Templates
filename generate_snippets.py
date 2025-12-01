@@ -198,8 +198,11 @@ def generate_cpp_json(template_directory, output_path='cpp.json'):
         snippets[name] = snippet_entry
         name_conflicts[name] = str(relative_path)
         shortcut_conflicts[shortcut] = str(relative_path)
-        
+
         print(f"  ✓ Added snippet: {name} (trigger: {shortcut})")
+        # Also print the description for visibility
+        if description:
+            print(f"    Description: {description}")
     
     # Final conflict summary
     duplicate_names = {name: files for name, files in name_conflicts.items() 
@@ -243,7 +246,8 @@ def generate_cpp_json(template_directory, output_path='cpp.json'):
         # Show a preview of the generated JSON
         print(f"\n📋 Preview of generated snippets:")
         for name, snippet in snippets.items():
-            print(f"  - {name}: '{snippet['prefix']}' -> {len(snippet['body'])} lines")
+            desc = snippet.get('description', '')
+            print(f"  - {name}: '{snippet['prefix']}' -> {len(snippet['body'])} lines; {desc}")
     
     except Exception as e:
         print(f"❌ ERROR: Failed to write to {output_path}")

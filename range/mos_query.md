@@ -4,7 +4,7 @@ Mo's Offline Query Template
 ll NSQRT = sqrt(n);
 ll queries[q][4];
 
-forn(q){
+forn(i, q){
     I(l, r);
     l--, r--;
     queries[i][0] = l / NSQRT;

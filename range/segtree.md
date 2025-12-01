@@ -1,14 +1,15 @@
 Segment Tree 
 seg
 Segment Tree class
+template<typename T, typename Fn>
 class SegTree {
 public:
-    vector<ll$0> seg;
+    vector<T> seg;
     ll size;
 
-    function<ll$0(const ll$0&, const ll$0&)> combine;
+    Fn combine;
 
-    void build(const vector<ll$0>& ve, ll idx, ll low, ll high) {
+    void build(const vector<T>& ve, ll idx, ll low, ll high) {
         if (low == high) {
             seg[idx] = ve[low];
             return;
@@ -19,13 +20,13 @@ public:
         seg[idx] = combine(seg[2*idx+1], seg[2*idx+2]);
     }
 
-    pair<ll$0, bool> query(ll idx, ll low, ll high, ll l, ll r) {
+    pair<T, bool> query(ll idx, ll low, ll high, ll l, ll r) {
         if (l <= low && r >= high) return pair(seg[idx], true);
-        if (l > high || r < low) return pair(ll$0(), false);
+        if (l > high || r < low) return pair(T(), false);
 
         ll mid = (low + high) / 2;
-        pair<ll$0, bool> left = query(2*idx+1, low, mid, l, r);
-        pair<ll$0, bool> right = query(2*idx+2, mid+1, high, l, r);
+        pair<T, bool> left = query(2*idx+1, low, mid, l, r);
+        pair<T, bool> right = query(2*idx+2, mid+1, high, l, r);
 
         if (!left.S) return right;
         else if (!right.S) return left;
@@ -33,7 +34,7 @@ public:
         return pair(combine(left.F, right.F), true);
     }
 
-    void update(ll idx, ll low, ll high, ll k, ll$0 u) {
+    void update(ll idx, ll low, ll high, ll k, T u) {
         if (low == high) {
             seg[idx] = u;
             return;
@@ -44,17 +45,19 @@ public:
         seg[idx] = combine(seg[2*idx+1], seg[2*idx+2]);
     }
 
-    SegTree(const vc<ll$0>& ve, function<ll$0(const ll$0&, const ll$0&)> f) : combine(f) {
+    SegTree(const vc<T>& ve, Fn f) : combine(move(f)) {
         size = ve.size();
         seg.resize(4*size);
         build(ve, 0, 0, size-1);
     }
 
-    ll$0 query(ll l, ll r) {
+    T query(ll l, ll r) {
         return query(0, 0, size-1, l, r).F;
     }
 
-    void update(ll k, ll$0 u) {
+    void update(ll k, T u) {
         update(0, 0, size-1, k, u);
     }
 };
+template<typename T, typename Fn>
+SegTree(const vc<T>&, Fn) -> SegTree<T, Fn>;

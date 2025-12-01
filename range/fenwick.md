@@ -25,7 +25,7 @@ class Fenwick{
     Fenwick(vl& ve){
         n = len(ve);
         BIT = vec(n+1, 0ll);
-        forn(n){
+        forn(i, n){
             update(ve[i], i);
         }
     }

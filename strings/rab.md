@@ -41,7 +41,7 @@ class rab{
         n = len(s);
         pre = move(vec(n+1, hshcnt, 0ll));
 
-        forn(n){
+        forn(i, n){
             forn(h, hshcnt){
                 pre[i+1][h] = (pre[i][h] + mpp(s[i]) * prepp[i][h]) % m[h];
             }
@@ -60,7 +60,7 @@ class rab{
     vl gethash(str& s){
         vl out(hshcnt);
 
-        forn(len(s))
+        forn(i, len(s))
         forn(h, hshcnt)
         out[h] = (out[h] + (mpp(s[i]) * prepp[i][h]) % m[h]) % m[h];
 

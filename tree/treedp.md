@@ -1,6 +1,6 @@
 treedp
 treedp
-treedp
+treedp (dsu tree dynamic programming)
 auto treeDP = [&]<typename T = set<ll>, typename R = ll>() -> vc<R> {
 
     auto merge = [&](T& a, const T& b) -> void {
