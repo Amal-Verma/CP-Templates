@@ -13,7 +13,7 @@ void ifactorial(ll N){
     factorial(N);
     ifact = move(vec(N, 1ll));
     ifact[N-1] = ModInv(fact[N-1]);
-    forrn(N-2)
+    forrn(i, N-2)
     ifact[i] = ModMul(ifact[i+1], i+1);
 }
 

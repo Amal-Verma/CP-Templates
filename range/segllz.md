@@ -3,16 +3,16 @@ segllz
 Segment Tree <long long> class with lazy propagation
 class SegTree {
 public:
-    vector<ll> seg;
-    vector<ll> lz1;
-    vector<pair<ll, bool>> lz2;
+    vl seg;
+    vl lz1;
+    vpl lz2;
     ll size;
 
     inline ll combine(const ll& a,const ll& b){
         return a + b;
     }
 
-    void lzp1(ll idx, ll low, ll high){
+    inline void lzp1(ll idx, ll low, ll high){
         if (!lz1[idx]) rt;
         seg[idx] += lz1[idx] * (high - low + 1);
         
@@ -23,7 +23,7 @@ public:
         lz1[idx] = 0;
     }
 
-    void lzp2(ll idx, ll low, ll high){
+    inline void lzp2(ll idx, ll low, ll high){
         if (!lz2[idx].S) rt;
         seg[idx] = lz2[idx].F* (high - low + 1);
 
@@ -36,7 +36,7 @@ public:
         lz2[idx].S = false;
     }
 
-    void lzp(ll idx, ll low, ll high){  
+    inline void lzp(ll idx, ll low, ll high){  
         lzp2(idx, low, high);
         lzp1(idx, low, high);
     }

@@ -1,6 +1,6 @@
 FWHT
 FWHT
-FWHT
+Fast Walsh Hadamard Transform for AND, OR, XOR convolutions.
 void FWHT(vl& a, bool inv) {
 	for (int n = len(a), step = 1; step < n; step *= 2) {
 		for (int i = 0; i < n; i += 2 * step) 

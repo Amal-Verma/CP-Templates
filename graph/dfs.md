@@ -1,7 +1,7 @@
 DFS
 DFS
 DFS
-auto dfs = [&](auto&& self, ll node, ll par) -> void {
+auto dfs$0 = [&](auto&& self, ll node, ll par) -> void {
 
     fora(g[node], child){
         if (child == par) continue;
@@ -9,4 +9,4 @@ auto dfs = [&](auto&& self, ll node, ll par) -> void {
     }
     
 };
-dfs(dfs, 1, 0);
+dfs$0(dfs$0, 1, 0);

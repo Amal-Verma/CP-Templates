@@ -1,17 +1,19 @@
 Segment Tree 
-seg
+segrec
 Segment Tree class
-template<typename T, typename Fn>
+template<typename K, typename Fn1, typename Fn2>
 class SegTree {
 public:
-    vector<T> seg;
     ll size;
+    Fn1 combine;
+    Fn2 createNode;
 
-    Fn combine;
+    using T = decltype(std::declval<Fn2>()(std::declval<K>()));
+    vector<T> seg;
 
-    void build(const vector<T>& ve, ll idx, ll low, ll high) {
+    void build(const vector<K>& ve, ll idx, ll low, ll high) {
         if (low == high) {
-            seg[idx] = ve[low];
+            seg[idx] = move(createNode(ve[low]));
             return;
         }
         ll mid = (low + high) / 2;
@@ -21,8 +23,8 @@ public:
     }
 
     pair<T, bool> query(ll idx, ll low, ll high, ll l, ll r) {
-        if (l <= low && r >= high) return pair(seg[idx], true);
-        if (l > high || r < low) return pair(T(), false);
+        if (l <= low && r >= high) return {seg[idx], true};
+        if (l > high || r < low) return {T(), false};
 
         ll mid = (low + high) / 2;
         pair<T, bool> left = query(2*idx+1, low, mid, l, r);
@@ -31,12 +33,12 @@ public:
         if (!left.S) return right;
         else if (!right.S) return left;
 
-        return pair(combine(left.F, right.F), true);
+        return {combine(left.F, right.F), true};
     }
 
-    void update(ll idx, ll low, ll high, ll k, T u) {
+    void update(ll idx, ll low, ll high, ll k, K u) {
         if (low == high) {
-            seg[idx] = u;
+            seg[idx] = move(createNode(u));
             return;
         }
         ll mid = (low + high) / 2;
@@ -45,7 +47,7 @@ public:
         seg[idx] = combine(seg[2*idx+1], seg[2*idx+2]);
     }
 
-    SegTree(const vc<T>& ve, Fn f) : combine(move(f)) {
+    SegTree(const vc<K>& ve, Fn1 f, Fn2 g = Identity<K>{}) : combine(f), createNode(g) {
         size = ve.size();
         seg.resize(4*size);
         build(ve, 0, 0, size-1);
@@ -55,9 +57,9 @@ public:
         return query(0, 0, size-1, l, r).F;
     }
 
-    void update(ll k, T u) {
+    void update(ll k, K u) {
         update(0, 0, size-1, k, u);
     }
 };
-template<typename T, typename Fn>
-SegTree(const vc<T>&, Fn) -> SegTree<T, Fn>;
+template<typename K, typename Fn1>
+SegTree(const vc<K>&, Fn1) -> SegTree<K, Fn1, decltype(Identity<K>{})>;

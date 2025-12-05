@@ -1,7 +1,7 @@
 BFS
 BFS
 BFS
-auto bfs = [&](ll start){
+auto bfs$0 = [&](ll start){
     vc<bool> visited(n+1, -1);
     queue<ll> q;
 
@@ -20,3 +20,4 @@ auto bfs = [&](ll start){
         }
     }
 }
+bfs$0(1);
